@@ -36,16 +36,18 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(route('admin-panel', absolute: false));
+            event(new Registered($user));
+            Auth::login($user);
+            return redirect(route('admin-panel', [], false));
+        } catch (\Exception $e) {
+            return back()->with('error', 'Registrasi gagal: ' . $e->getMessage());
+        }
     }
 }

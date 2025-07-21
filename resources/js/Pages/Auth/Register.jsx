@@ -3,9 +3,11 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Register() {
+    const { props } = usePage();
+    const flashError = props.flash?.error;
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -24,6 +26,12 @@ export default function Register() {
     return (
         <GuestLayout>
             <Head title="Register" />
+
+            {flashError && (
+                <div className="animate__animated animate__fadeInDown mb-4 rounded bg-red-100 px-4 py-3 text-red-700 shadow">
+                    {flashError}
+                </div>
+            )}
 
             <form onSubmit={submit}>
                 <div>

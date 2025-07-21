@@ -14,6 +14,7 @@ class Tag extends Model
     protected $fillable = [
         'name',
         'type',
+        'colour',
     ];
 
     public function projects()

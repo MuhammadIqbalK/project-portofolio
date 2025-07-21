@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom animations for card arrows */
+@keyframes bounce-x {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+@keyframes bounce-x-reverse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-4px);
+    }
+}
+
+@keyframes bounce-y {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(4px);
+    }
+}
+
+.animate-bounce-x {
+    animation: bounce-x 2s infinite;
+}
+
+.animate-bounce-x-reverse {
+    animation: bounce-x-reverse 2s infinite;
+}
+
+.animate-bounce-y {
+    animation: bounce-y 2s infinite;
+}

@@ -31,14 +31,18 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return [
-            ...parent::share($request),
+            // Merge parent shared data with additional shared data
+            // (Cannot use spread operator in PHP arrays, so use array_merge)
+            // This line is replaced by array_merge in the return statement below.
             'auth' => [
                 'user' => $request->user(),
             ],
-            'ziggy' => fn () => [
-                ...(new Ziggy)->toArray(),
-                'location' => $request->url(),
-            ],
+            'ziggy' => function () use ($request) {
+                return array_merge(
+                    (new Ziggy)->toArray(),
+                    ['location' => $request->url()]
+                );
+            },
         ];
     }
 }
