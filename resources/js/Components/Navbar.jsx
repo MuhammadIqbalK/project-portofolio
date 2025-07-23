@@ -29,7 +29,7 @@ export default function Navbar({ isDarkMode, toggleDarkMode }) {
     return (
         <nav
             ref={navbarRef}
-            className={`fixed top-4 z-50 ml-10 -translate-x-1/2 transform rounded-full shadow-lg ${
+            className={`fixed top-4 z-50 ml-3 -translate-x-1/2 transform rounded-full shadow-lg md:ml-10 ${
                 isDarkMode
                     ? 'bg-bg-dark shadow-text-dark/20'
                     : 'bg-bg-light shadow-text-light/20'

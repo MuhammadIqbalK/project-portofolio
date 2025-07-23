@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
@@ -51,7 +52,11 @@ export default function ProjectsSection({ isDarkMode, projects = [] }) {
         if (project.tags && project.tags.length > 0 && project.tags[0].colour) {
             return project.tags[0].colour + '99';
         }
-        return isDarkMode ? '#39357999' : '#8b86ca99';
+        // Generate a random bright color (avoid dark)
+        const hue = Math.floor(Math.random() * 360);
+        const saturation = 70 + Math.floor(Math.random() * 20); // 70-90%
+        const lightness = 65 + Math.floor(Math.random() * 15); // 65-80%
+        return `hsl(${hue}, ${saturation}%, ${lightness}%, 0.6)`;
     }
 
     return (
@@ -70,81 +75,87 @@ export default function ProjectsSection({ isDarkMode, projects = [] }) {
                         Projects
                     </h2>
                     <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
-                        {projects.map((project, index) => (
-                            <div
-                                key={project.id}
-                                className={`overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 ${
-                                    isDarkMode ? 'bg-gray-800' : 'bg-white'
-                                }`}
-                                style={{
-                                    animationDelay: `${index * 0.2}s`,
-                                    boxShadow: `0 8px 40px 0 ${getShadowColor(project)}, 0 2px 16px 0 ${getShadowColor(project)}`,
-                                    filter: 'none',
-                                }}
-                            >
-                                {project.images && project.images.length > 0 ? (
-                                    <img
-                                        src={
-                                            project.images[0].url.startsWith(
-                                                'http',
-                                            )
-                                                ? project.images[0].url
-                                                : `/storage/${project.images[0].url}`
-                                        }
-                                        alt={project.title}
-                                        className="h-48 w-full object-cover transition-all duration-300 hover:scale-110"
-                                    />
-                                ) : (
-                                    <div
-                                        className={`h-48 w-full transition-all duration-300 hover:scale-110 ${
-                                            isDarkMode
-                                                ? 'bg-gray-700'
-                                                : 'bg-gray-200'
-                                        }`}
-                                    ></div>
-                                )}
-                                <div className="p-4 sm:p-6">
-                                    <h3
-                                        className={`mb-2 text-lg font-bold sm:text-xl ${
-                                            isDarkMode
-                                                ? 'text-white'
-                                                : 'text-gray-900'
-                                        }`}
-                                    >
-                                        {project.title}
-                                    </h3>
-                                    <p
-                                        className={`mb-4 text-sm sm:text-base ${
-                                            isDarkMode
-                                                ? 'text-gray-300'
-                                                : 'text-gray-600'
-                                        }`}
-                                    >
-                                        {project.short_description}
-                                    </p>
-                                    {/* Render tags if available */}
-                                    <div className="flex flex-wrap gap-2">
-                                        {(project.tags || []).map((tag) => (
-                                            <span
-                                                key={tag.id}
-                                                className="rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 hover:scale-110"
-                                                style={{
-                                                    backgroundColor:
-                                                        tag.colour ||
-                                                        (isDarkMode
-                                                            ? '#393579'
-                                                            : '#8b86ca'),
-                                                    color: '#fff',
-                                                }}
-                                                title={tag.type}
-                                            >
-                                                {tag.name}
-                                            </span>
-                                        ))}
+                        {projects.map((project, index) => {
+                            const shadowColor = getShadowColor(project);
+                            return (
+                                <Link
+                                    key={project.id}
+                                    href={`/projects/${project.slug}`}
+                                    className={`block cursor-pointer overflow-hidden rounded-lg transition-all duration-300 hover:scale-105 ${
+                                        isDarkMode ? 'bg-gray-800' : 'bg-white'
+                                    }`}
+                                    style={{
+                                        animationDelay: `${index * 0.2}s`,
+                                        boxShadow: `0 8px 40px 0 ${shadowColor}, 0 2px 16px 0 ${shadowColor}`,
+                                        filter: 'none',
+                                    }}
+                                >
+                                    {project.images &&
+                                    project.images.length > 0 ? (
+                                        <img
+                                            src={
+                                                project.images[0].url.startsWith(
+                                                    'http',
+                                                )
+                                                    ? project.images[0].url
+                                                    : `/storage/${project.images[0].url}`
+                                            }
+                                            alt={project.title}
+                                            className="h-48 w-full object-cover transition-all duration-300 hover:scale-110"
+                                            loading="lazy"
+                                        />
+                                    ) : (
+                                        <div
+                                            className={`h-48 w-full transition-all duration-300 hover:scale-110 ${
+                                                isDarkMode
+                                                    ? 'bg-gray-700'
+                                                    : 'bg-gray-200'
+                                            }`}
+                                        ></div>
+                                    )}
+                                    <div className="p-4 sm:p-6">
+                                        <h3
+                                            className={`mb-2 text-lg font-bold sm:text-xl ${
+                                                isDarkMode
+                                                    ? 'text-white'
+                                                    : 'text-gray-900'
+                                            }`}
+                                        >
+                                            {project.title}
+                                        </h3>
+                                        <p
+                                            className={`mb-4 text-sm sm:text-base ${
+                                                isDarkMode
+                                                    ? 'text-gray-300'
+                                                    : 'text-gray-600'
+                                            }`}
+                                        >
+                                            {project.short_description}
+                                        </p>
+                                        {/* Render tags if available */}
+                                        <div className="flex flex-wrap gap-2">
+                                            {(project.tags || []).map((tag) => (
+                                                <span
+                                                    key={tag.id}
+                                                    className="rounded-full px-3 py-1 text-xs font-medium transition-all duration-300 hover:scale-110"
+                                                    style={{
+                                                        backgroundColor:
+                                                            tag.colour ||
+                                                            (isDarkMode
+                                                                ? '#393579'
+                                                                : '#8b86ca'),
+                                                        color: '#fff',
+                                                    }}
+                                                    title={tag.type}
+                                                >
+                                                    {tag.name}
+                                                </span>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        ))}
+                                </Link>
+                            );
+                        })}
                     </div>
                 </div>
             </div>

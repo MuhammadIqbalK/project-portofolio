@@ -13,7 +13,7 @@ export default function ExperienceSection({ isDarkMode }) {
             title: 'IT Operational',
             company: 'PT Nusantara Unggul Sarana Adicipta',
             period: '2025 - Present',
-            description: 'Develop module for HRMS Nusa and SNI',
+            description: 'Develop module for HRMS',
         },
         {
             title: 'Fullstack Programmer and General Admin',

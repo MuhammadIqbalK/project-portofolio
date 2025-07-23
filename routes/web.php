@@ -8,6 +8,9 @@ use Inertia\Inertia;
 use App\Models\Project;
 use App\Models\Tag;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProjectDetailController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\DownloadController;
 
 Route::middleware('guest')->group(function () {
   // Dashboard routes
@@ -33,6 +36,10 @@ Route::middleware('guest')->group(function () {
   Route::delete('admin/project-images/{image:id}', [App\Http\Controllers\ProjectController::class, 'deleteImage']);
   // Route untuk detach satu tag dari project
   Route::delete('admin/projects/{project}/tags/{tag}', [App\Http\Controllers\ProjectController::class, 'detachTag']);
+  Route::get('/admin/projects/{project}/details', [ProjectDetailController::class, 'index']);
+  Route::post('/admin/project-details', [ProjectDetailController::class, 'store']);
+  Route::put('/admin/project-details/{projectDetail}', [ProjectDetailController::class, 'update']);
+  Route::delete('/admin/project-details/{projectDetail}', [ProjectDetailController::class, 'destroy']);
 });
 
 Route::post('/contact', [ContactController::class, 'send']);
@@ -46,10 +53,15 @@ Route::get('/secret', function () {
     ]);
 })->middleware(['guest'])->name('admin-panel');
 
+Route::get('/projects/{slug}', [ProjectController::class, 'publicShow']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/download', [DownloadController::class, 'download'])
+     ->middleware('throttle:3,5'); // 3 request per 5 menit per IP
 
 require __DIR__.'/auth.php';

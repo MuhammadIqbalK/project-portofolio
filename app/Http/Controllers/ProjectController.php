@@ -125,4 +125,20 @@ class ProjectController extends Controller
         $project->tags()->detach($tag->id);
         return response()->json(['success' => true, 'message' => 'Tag detached']);
     }
+
+    public function publicShow($slug)
+    {
+        $project = \App\Models\Project::with(['images', 'tags'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $details = \App\Models\ProjectDetail::where('project_id', $project->id)
+            ->orderBy('position')
+            ->get();
+
+        return inertia('Projects/Show', [
+            'project' => $project,
+            'details' => $details,
+        ]);
+    }
 } 

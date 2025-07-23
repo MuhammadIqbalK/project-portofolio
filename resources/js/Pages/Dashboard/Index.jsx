@@ -13,13 +13,19 @@ import { Head } from '@inertiajs/react';
 import 'animate.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Portfolio({ tags = [], projects = [] }) {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const stored = localStorage.getItem('theme');
+            if (stored) return stored === 'dark';
+        }
+        return false;
+    });
     const parallaxRef = useRef(null);
 
     const toggleDarkMode = () => {
@@ -39,6 +45,24 @@ export default function Portfolio({ tags = [], projects = [] }) {
                 scrub: true,
             },
         });
+    }, []);
+
+    useEffect(() => {
+        if (isDarkMode) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+        window.dispatchEvent(new Event('storage'));
+    }, [isDarkMode]);
+
+    useEffect(() => {
+        const syncTheme = () => {
+            const stored = localStorage.getItem('theme');
+            setIsDarkMode(stored === 'dark');
+        };
+        window.addEventListener('storage', syncTheme);
+        return () => window.removeEventListener('storage', syncTheme);
     }, []);
 
     return (

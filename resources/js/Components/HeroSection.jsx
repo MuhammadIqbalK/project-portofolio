@@ -60,7 +60,8 @@ export default function HeroSection({ isDarkMode }) {
                     Developer
                 </h1>
                 <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
-                    <button
+                    <a
+                        href="/download"
                         className={`animate__animated animate__pulse animate__infinite inline-flex items-center justify-center gap-2 rounded-full px-6 py-2 text-sm font-medium shadow-xl transition-all duration-300 hover:scale-105 sm:px-8 sm:py-3 sm:text-base ${
                             isDarkMode
                                 ? 'bg-primary-dark text-text-dark hover:bg-accent-dark'
@@ -81,7 +82,7 @@ export default function HeroSection({ isDarkMode }) {
                             />
                         </svg>
                         View Resume
-                    </button>
+                    </a>
 
                     <a
                         href="#project"

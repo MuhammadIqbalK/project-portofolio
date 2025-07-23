@@ -4,14 +4,29 @@ export default function CertificationSection({ isDarkMode }) {
     const certRef = useRef(null);
     const certifications = [
         {
-            name: 'AWS Certified Solutions Architect – Associate',
-            issuer: 'Amazon Web Services (AWS)',
+            name: 'Application development Foundations',
+            issuer: 'Digitalent (Kominfo & Oracle)',
+            year: '2022',
+        },
+        {
+            name: 'Independent Study Mobile Application',
+            issuer: 'Ininite Learning (Kampus Merdeka)',
             year: '2023',
         },
         {
-            name: 'Google IT Support Professional Certificate',
-            issuer: 'Coursera',
-            year: '2022',
+            name: 'Internship Backend Engineer',
+            issuer: 'PT.Qatros Teknologi nusantara (Kampus Merdeka)',
+            year: '2023',
+        },
+        {
+            name: 'Alibaba Cloud Certified Associate - System Operator',
+            issuer: 'Alibaba Cloud',
+            year: '2025',
+        },
+        {
+            name: 'ReactJs Fundamentals',
+            issuer: 'Codepolitan',
+            year: '2025',
         },
     ];
     return (

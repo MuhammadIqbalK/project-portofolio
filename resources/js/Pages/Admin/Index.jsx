@@ -1,3 +1,4 @@
+import ProjectDetailsSection from '@/Components/ProjectDetailsSection';
 import { Head } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 
@@ -21,6 +22,7 @@ export default function AdminIndex({ projects, tags }) {
     const [editTagId, setEditTagId] = useState(null);
     const [tagMessage, setTagMessage] = useState(null);
     const [tagsData, setTagsData] = useState(tags);
+    const [showDetailsFor, setShowDetailsFor] = useState(null);
 
     // Pagination for tags
     const TAGS_PER_PAGE = 10;
@@ -670,6 +672,12 @@ export default function AdminIndex({ projects, tags }) {
                                     )}
                                 </div>
                             </form>
+                            {/* Project Details Section (CRUD ala blog) */}
+                            {editProjectId && (
+                                <ProjectDetailsSection
+                                    projectId={editProjectId}
+                                />
+                            )}
                         </div>
 
                         {/* Projects Table */}
@@ -818,6 +826,16 @@ export default function AdminIndex({ projects, tags }) {
                                                     >
                                                         Delete
                                                     </button>
+                                                    <button
+                                                        onClick={() =>
+                                                            setShowDetailsFor(
+                                                                p.id,
+                                                            )
+                                                        }
+                                                        className="text-sm text-indigo-600 hover:text-indigo-800"
+                                                    >
+                                                        Manage Details
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -828,6 +846,26 @@ export default function AdminIndex({ projects, tags }) {
                     </div>
                 </div>
             </div>
+            {/* Modal Project DetailsSection */}
+            {showDetailsFor && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"
+                    onClick={() => setShowDetailsFor(null)}
+                >
+                    <div
+                        className="relative max-h-screen w-full max-w-2xl overflow-y-auto rounded-lg bg-white p-4 shadow-lg"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            className="absolute right-2 top-2 text-gray-500 hover:text-gray-700"
+                            onClick={() => setShowDetailsFor(null)}
+                        >
+                            &times;
+                        </button>
+                        <ProjectDetailsSection projectId={showDetailsFor} />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

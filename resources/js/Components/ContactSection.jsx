@@ -96,7 +96,12 @@ export default function ContactSection({ isDarkMode }) {
                                 Get In Touch
                             </h3>
                             <div className="space-y-4">
-                                <div className="flex items-center space-x-3 transition-all duration-300 hover:scale-105">
+                                <a
+                                    href="https://mail.google.com/mail/?view=cm&fs=1&to=iqbalkresna.12@gmail.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center space-x-3 transition-all duration-300 hover:scale-105"
+                                >
                                     <svg
                                         className="h-6 w-6 text-blue-500"
                                         fill="none"
@@ -119,8 +124,13 @@ export default function ContactSection({ isDarkMode }) {
                                     >
                                         iqbalkresna.12@gmail.com
                                     </span>
-                                </div>
-                                <div className="flex items-center space-x-3 transition-all duration-300 hover:scale-105">
+                                </a>
+                                <a
+                                    href="https://wa.me/6289605641672"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center space-x-3 transition-all duration-300 hover:scale-105"
+                                >
                                     <svg
                                         className="h-6 w-6 text-blue-500"
                                         fill="none"
@@ -141,9 +151,9 @@ export default function ContactSection({ isDarkMode }) {
                                                 : 'text-gray-600'
                                         }
                                     >
-                                        +1 234 567 890
+                                        +62 8960 5641 672
                                     </span>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div className="animate__animated animate__fadeInRight">
