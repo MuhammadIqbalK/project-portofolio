@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title inertia>{{ config('app.seo_title', config('app.name', 'Laravel') . ' | Fullstack Web & Software Developer Portfolio') }}</title>
+        <meta name="description" content="{{ config('app.seo_description', 'Fullstack Web & Software Developer Portfolio - Building modern web applications with Laravel, Nodejs, and modern technologies with rapid speed.') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
