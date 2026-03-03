@@ -72,27 +72,25 @@ export default function AboutSection({ isDarkMode }) {
             <div>
                 <div className="mx-auto max-w-4xl">
                     <h2
-                        className={`animate__animated animate__fadeInLeft mb-8 text-center font-heading text-2xl font-bold sm:mb-12 sm:text-3xl lg:text-4xl ${
-                            isDarkMode ? 'text-text-dark' : 'text-text-light'
-                        }`}
+                        className={`animate__animated animate__fadeInLeft mb-8 text-center font-heading text-2xl font-bold sm:mb-12 sm:text-3xl lg:text-4xl ${isDarkMode ? 'text-text-dark' : 'text-text-light'
+                            }`}
                     >
                         About Me
                     </h2>
                     <div
-                        className={`animate__animated animate__fadeInUp text-base leading-relaxed sm:text-lg ${
-                            isDarkMode ? 'text-text-dark' : 'text-text-light'
-                        }`}
+                        className={`animate__animated animate__fadeInUp text-base leading-relaxed sm:text-lg ${isDarkMode ? 'text-text-dark' : 'text-text-light'
+                            }`}
                     >
-                        <p className="mb-6">
-                            I’m a dedicated methodical software developer and
-                            system analyst with strong expertise in PHP,
-                            JavaScript, Ruby on Rails, PostgreSQL, MySQL,
-                            Jenkins, and Git. Expertise in UI/UX design, I bring
-                            a user-centered approach to building scalable and
-                            efficient systems. I excel both independently and in
-                            teams, and I’m always eager to learn, solve complex
-                            problems, and deliver impactful digital solutions.
-                        </p>
+                        <div className="mb-6 space-y-6 leading-relaxed">
+                            <p>
+                                I am a dedicated and methodical software developer and system analyst with
+                                strong expertise in PHP, JavaScript, Ruby on Rails, PostgreSQL, MySQL,
+                                Jenkins, and Git. With a solid foundation in UI/UX design, I take a
+                                user-centered approach to building scalable, efficient, and high-performing
+                                systems. I thrive both independently and in collaborative environments,
+                                consistently delivering impactful digital solutions that drive measurable results.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

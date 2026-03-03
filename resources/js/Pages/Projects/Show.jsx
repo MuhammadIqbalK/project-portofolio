@@ -1,3 +1,5 @@
+import GridBackground from '@/Components/GridBackground';
+import StarryBackground from '@/Components/StarryBackground';
 import { useEffect, useState } from 'react';
 
 export default function ProjectShow({ project, details }) {
@@ -7,7 +9,7 @@ export default function ProjectShow({ project, details }) {
             const stored = localStorage.getItem('theme');
             if (stored) return stored === 'dark';
         }
-        return false;
+        return true;
     });
 
     useEffect(() => {
@@ -37,7 +39,7 @@ export default function ProjectShow({ project, details }) {
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: ${isDarkMode ? '#1c1c1c' : '#e3e3e3'};
+        background: ${isDarkMode ? '#090A0F' : '#e3e3e3'};
         border-radius: 10px;
       }
       ::-webkit-scrollbar-thumb {
@@ -51,7 +53,7 @@ export default function ProjectShow({ project, details }) {
       }
       * {
         scrollbar-width: thin;
-        scrollbar-color: ${isDarkMode ? '#f8703a #1c1c1c' : '#c53d07 #e3e3e3'};
+        scrollbar-color: ${isDarkMode ? '#f8703a #090A0F' : '#c53d07 #e3e3e3'};
       }
       /* NProgress bar (if used) */
       #nprogress .bar {
@@ -82,13 +84,50 @@ export default function ProjectShow({ project, details }) {
         <div
             className={`min-h-screen font-sans ${
                 isDarkMode
-                    ? 'bg-bg-dark text-text-dark'
-                    : 'bg-bg-light text-text-light'
+                    ? 'text-text-dark'
+                    : 'text-text-light'
             } transition-colors duration-300`}
             style={{
                 fontFamily: 'Ubuntu Sans, sans-serif',
             }}
         >
+            {/* Global Background - Grid for light mode, Stars for dark mode */}
+            {isDarkMode ? (
+                <>
+                    {/* Radial gradient background for dark mode */}
+                    <div
+                        className="fixed inset-0 -z-20"
+                        style={{
+                            background: 'radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%)',
+                        }}
+                    />
+                    {/* Animated Stars */}
+                    <StarryBackground />
+                    {/* Subtle parallax overlay */}
+                    <div
+                        className="fixed inset-0 -z-10 opacity-5"
+                        style={{
+                            background: 'linear-gradient(135deg, #f8703a 0%, #393579 50%, #5a51b8 100%)',
+                            backgroundSize: '100% 200%',
+                            backgroundPosition: 'center 0%',
+                        }}
+                    />
+                </>
+            ) : (
+                <>
+                    {/* Animated Grid Background for light mode */}
+                    <GridBackground />
+                    {/* Subtle gradient overlay */}
+                    <div
+                        className="fixed inset-0 -z-10"
+                        style={{
+                            background: 'linear-gradient(135deg, rgba(197, 61, 7, 0.05) 0%, rgba(139, 134, 202, 0.05) 50%, rgba(80, 71, 174, 0.05) 100%)',
+                            backgroundSize: '100% 200%',
+                            backgroundPosition: 'center 0%',
+                        }}
+                    />
+                </>
+            )}
             {/* Floating Button (hanya md ke atas) */}
             <div className="fixed bottom-8 left-8 z-50 hidden flex-col gap-4 md:flex">
                 <button

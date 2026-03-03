@@ -1,5 +1,5 @@
 import ProjectDetailsSection from '@/Components/ProjectDetailsSection';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { useEffect, useRef, useState } from 'react';
 
 export default function AdminIndex({ projects, tags }) {
@@ -32,6 +32,11 @@ export default function AdminIndex({ projects, tags }) {
         (tagPage - 1) * TAGS_PER_PAGE,
         tagPage * TAGS_PER_PAGE,
     );
+
+    // Logout handler
+    const handleLogout = () => {
+        router.post('/logout');
+    };
 
     useEffect(() => {
         if (tagMessage) {
@@ -219,9 +224,18 @@ export default function AdminIndex({ projects, tags }) {
     return (
         <div>
             <Head title="Dashboard" />
-            <h2 className="bg-slate-100 text-center text-xl font-semibold leading-tight text-gray-800">
-                Secret Admin Panel
-            </h2>
+            <div className="flex items-center justify-between bg-slate-100 px-6 py-3">
+                <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                    Secret Admin Panel
+                </h2>
+                <button
+                    onClick={handleLogout}
+                    className="rounded bg-red-500 px-4 py-2 font-medium text-white transition hover:bg-red-600"
+                >
+                    Logout
+                </button>
+            </div>
+            
             <div className="m-6 rounded-lg bg-blue-100 p-6 shadow-lg">
                 <div className="flex space-x-6">
                     {/* Tag CRUD */}

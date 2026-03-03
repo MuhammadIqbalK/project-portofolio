@@ -31,18 +31,18 @@ export default function Navbar({ isDarkMode, toggleDarkMode }) {
             ref={navbarRef}
             className={`fixed top-4 z-50 ml-3 -translate-x-1/2 transform rounded-full shadow-lg md:ml-10 ${
                 isDarkMode
-                    ? 'bg-bg-dark shadow-text-dark/20'
-                    : 'bg-bg-light shadow-text-light/20'
+                ? 'bg-secondary-dark hover:bg-accent-dark'
+                : 'bg-secondary-light hover:bg-accent-gray'
             } animate__animated animate__fadeInDown px-3 py-2 sm:top-6 sm:px-4`}
-        >
+            >
             <div className="flex items-center justify-between space-x-4 sm:space-x-6 lg:space-x-8">
                 {/* Left: Dark/Light Mode Toggle */}
                 <button
                     onClick={toggleDarkMode}
                     className={`rounded-full p-1.5 transition-all duration-300 hover:scale-110 ${
                         isDarkMode
-                            ? 'bg-secondary-dark hover:bg-accent-dark'
-                            : 'bg-secondary-light hover:bg-accent-light'
+                        ? 'bg-bg-dark shadow-text-dark/20'
+                        : 'bg-bg-light shadow-text-light/20'
                     }`}
                 >
                     {isDarkMode ? (
@@ -71,7 +71,6 @@ export default function Navbar({ isDarkMode, toggleDarkMode }) {
                 {/* Navigation Links - Desktop */}
                 <div className="hidden items-center space-x-2 sm:flex lg:space-x-6">
                     {[
-                        'About Me',
                         'Skills',
                         'Project',
                         'Experience',
@@ -119,13 +118,12 @@ export default function Navbar({ isDarkMode, toggleDarkMode }) {
             {/* Fullscreen Menu - Mobile Only */}
             {isMenuOpen && (
                 <div
-                    className={`animate__animated animate__fadeInDown animate__faster fixed left-0 top-0 z-50 sm:hidden ${isDarkMode ? 'bg-bg-dark' : 'bg-bg-light'} flex items-center justify-between px-4 py-2 shadow-md`}
+                    className={`animate__animated animate__fadeInDown animate__faster fixed left-0 top-0 z-50 sm:hidden ${isDarkMode ? 'bg-secondary-light' : 'bg-secondary-dark'} flex items-center justify-between px-4 py-2 shadow-md rounded-md`}
                 >
                     {/* Navigation Links */}
                     <div className="flex flex-1 justify-center">
                         <div className="flex space-x-2">
                             {[
-                                'About Me',
                                 'Skills',
                                 'Project',
                                 'Experience',
@@ -137,7 +135,7 @@ export default function Navbar({ isDarkMode, toggleDarkMode }) {
                                     className={`font-medium transition-all duration-300 hover:scale-110 hover:text-primary-light ${
                                         isDarkMode
                                             ? 'text-text-dark hover:text-primary-dark'
-                                            : 'text-text-light hover:text-primary-light'
+                                            : 'text-text-dark hover:text-primary-dark'
                                     } px-1 py-1 text-xs`}
                                     style={{
                                         animationDelay: `${index * 0.1}s`,
@@ -158,7 +156,7 @@ export default function Navbar({ isDarkMode, toggleDarkMode }) {
                         <svg
                             className="h-4 w-4"
                             fill="none"
-                            stroke={isDarkMode ? '#f1f0f9' : '#07060f'}
+                            stroke={isDarkMode ? '#07060f'  : '#f1f0f9'}
                             viewBox="0 0 24 24"
                         >
                             <path

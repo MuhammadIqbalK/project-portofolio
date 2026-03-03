@@ -20,6 +20,7 @@ export default {
                 // Light Mode Colors
                 'text-light': '#07060f',
                 'bg-light': '#e3e3e3',
+                'bg-header': '#c2c2c2ff',
                 'primary-light': '#c53d07',
                 'secondary-light': '#8b86ca',
                 'accent-light': '#5047ae',

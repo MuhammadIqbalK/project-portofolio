@@ -12,7 +12,7 @@ use App\Http\Controllers\ProjectDetailController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DownloadController;
 
-Route::middleware('guest')->group(function () {
+//Route::middleware('guest')->group(function () {
   // Dashboard routes
   Route::get('/', function () {
     $tags = \App\Models\Tag::all();
@@ -40,7 +40,7 @@ Route::middleware('guest')->group(function () {
   Route::post('/admin/project-details', [ProjectDetailController::class, 'store']);
   Route::put('/admin/project-details/{projectDetail}', [ProjectDetailController::class, 'update']);
   Route::delete('/admin/project-details/{projectDetail}', [ProjectDetailController::class, 'destroy']);
-});
+//});
 
 Route::post('/contact', [ContactController::class, 'send']);
 
@@ -51,7 +51,7 @@ Route::get('/secret', function () {
         'projects' => $projects,
         'tags' => $tags,
     ]);
-})->middleware(['guest'])->name('admin-panel');
+})->middleware(['auth'])->name('admin-panel');
 
 Route::get('/projects/{slug}', [ProjectController::class, 'publicShow']);
 
@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+route::post('/register', [RegisterController::class, 'create'])->name('register');
 
 Route::get('/download', [DownloadController::class, 'download'])
      ->middleware('throttle:3,5'); // 3 request per 5 menit per IP
