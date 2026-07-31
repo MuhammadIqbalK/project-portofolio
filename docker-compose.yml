@@ -3,26 +3,19 @@ services:
     build:
       context: .
       dockerfile: ./dockerfile
-    container_name: project-portofolio-app
-    volumes:
-      - .:/var/www
-    working_dir: /var/www
-    networks:
-      - laravel
-
-  nginx:
-    build:
-      context: ./docker/nginx
-    container_name: project-portofolio-nginx
+    container_name: project-portofolio
     ports:
-      - "8001:80"
+      - "8000:80"
+    environment:
+      - APP_ENV=${APP_ENV:-production}
+      - APP_KEY=${APP_KEY:-changeme}
+      - APP_URL=${APP_URL:-http://localhost:8000}
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/var/www/database/database.sqlite
     volumes:
-      - .:/var/www
-    depends_on:
-      - app
-    networks:
-      - laravel
+      - portofolio-data:/var/www/database
+      - portofolio-storage:/var/www/storage
 
-networks:
-  laravel:
-    driver: bridge
+volumes:
+  portofolio-data:
+  portofolio-storage:
