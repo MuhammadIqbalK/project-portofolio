@@ -19,9 +19,7 @@ RUN docker-php-ext-install \
     exif \
     pcntl \
     bcmath \
-    gd \
-    pdo_sqlite \ 
-    sqlite3
+    gd 
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
