@@ -24,9 +24,10 @@ RUN docker-php-ext-install \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Run php-fpm as root so mounted host files (owned by uid 1000) stay writable
-RUN sed -i "s/^user = www-data/user = root/" /usr/local/etc/php-fpm.d/www.conf \
-    && sed -i "s/^group = www-data/group = root/" /usr/local/etc/php-fpm.d/www.conf
+# Map www-data to host uid/gid 1000 so bind-mounted files stay writable
+RUN usermod -u 1000 www-data \
+    && groupmod -g 1000 www-data \
+    && sed -i "s/^listen = 9000/listen = 9001/" /usr/local/etc/php-fpm.d/www.conf
 
 WORKDIR /var/www
 
