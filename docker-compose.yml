@@ -15,7 +15,7 @@ services:
       context: ./docker/nginx
     container_name: project-portofolio-nginx
     ports:
-      - "8000:80"
+      - "8001:80"
     volumes:
       - .:/var/www
     depends_on:
