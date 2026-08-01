@@ -8,7 +8,6 @@ services:
       - "8001:80"
     environment:
       - APP_ENV=${APP_ENV:-production}
-      - APP_KEY=${APP_KEY:-changeme}
       - APP_URL=${APP_URL:-http://localhost:8000}
       - DB_CONNECTION=sqlite
       - DB_DATABASE=/var/www/database/database.sqlite
