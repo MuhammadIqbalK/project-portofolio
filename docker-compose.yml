@@ -8,6 +8,8 @@ services:
       - "8001:80"
     environment:
       - APP_ENV=${APP_ENV:-production}
+      - APP_URL=
+      - ASSET_URL=
       - DB_CONNECTION=sqlite
       - DB_DATABASE=/var/www/database/database.sqlite
     volumes:
